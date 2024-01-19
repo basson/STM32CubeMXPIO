@@ -1,6 +1,6 @@
 {
-  "name": "stm32cubepio",
-  "displayName": "STM32CubePIO",
+  "name": "stm32cubemxpio",
+  "displayName": "STM32CubeMXPIO",
   "description": "Generate code from STM32CubeMX at *.ioc files",
   "version": "0.0.1",
   "pricing": "Free",
@@ -18,24 +18,24 @@
   "contributes": {
     "commands": [
       {
-        "command": "stm32cubepio.helloWorld",
-        "title": "Hello World"
+        "command": "stm32cubemxpio.generate",
+        "title": "STM32CubeMXPIO: Generate"
       }
     ],
     "configuration": {
-      "title": "STM32CubePIO",
+      "title": "STM32CubeMXPIO",
       "properties": {
-        "stm32cubepio.STM32CubeMxExec": {
+        "stm32cubemxpio.STM32CubeMxExec": {
           "type": "string",
           "default": "STM32CubeMX",
           "description": "Path to STM32CubeMX execute file"
         },
-        "stm32cubepio.ProjectIOCFile": {
+        "stm32cubemxpio.ProjectIOCFile": {
           "type": "string",
           "default": "project.ioc",
           "description": "STM32CubeMX *.ioc file"
         },
-        "stm32cubepio.ProjectType": {
+        "stm32cubemxpio.ProjectType": {
           "type": "string",
           "default": "C",
           "enum": [
@@ -44,7 +44,7 @@
           ],
           "description": "Project basic language C or C++"
         },
-        "stm32cubepio.ProjectBuildSystem": {
+        "stm32cubemxpio.ProjectBuildSystem": {
           "type": "string",
           "default": "PlatformIO",
           "enum": [
@@ -53,12 +53,12 @@
           ],
           "description": "Project build system"
         },
-        "stm32cubepio.CleanUnnecessaryFiles": {
+        "stm32cubemxpio.CleanUnnecessaryFiles": {
           "type": "boolean",
           "default": false,
           "description": "Clean unnecessary files after work STM32CubeMX"
         },
-        "stm32cubepio.AutoGenerateProject": {
+        "stm32cubemxpio.AutoGenerateProject": {
           "type": "boolean",
           "default": true,
           "description": "Generate code project automatic after change *.ioc files"

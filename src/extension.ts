@@ -63,7 +63,7 @@ export function activate(context: vscode.ExtensionContext) {
 	if (autoGenerateProject) {
 		setFileWatcher();
 	}
-	let disposable = vscode.commands.registerCommand('stm32cubepio.helloWorld', () => {
+	let disposable = vscode.commands.registerCommand('stm32cubemxpio.generate', () => {
 		generateCode();
 	});
 
@@ -71,7 +71,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function loadConfiguration(){
-	let cfg = vscode.workspace.getConfiguration("stm32cubepio", workspaceUri);
+	let cfg = vscode.workspace.getConfiguration("stm32cubemxpio", workspaceUri);
 
 	workspaceUri = vscode.workspace.workspaceFolders![0].uri;
 	workspacePath = workspaceUri.fsPath;
