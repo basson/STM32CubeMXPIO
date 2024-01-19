@@ -1,0 +1,94 @@
+{
+  "name": "stm32cubepio",
+  "displayName": "STM32CubePIO",
+  "description": "Generate code from STM32CubeMX at *.ioc files",
+  "version": "0.0.1",
+  "pricing": "Free",
+  "sponsor": {
+    "url": "https://www.buymeacoffee.com/basson"
+  },
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "stm32cubepio.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "configuration": {
+      "title": "STM32CubePIO",
+      "properties": {
+        "stm32cubepio.STM32CubeMxExec": {
+          "type": "string",
+          "default": "STM32CubeMX",
+          "description": "Path to STM32CubeMX execute file"
+        },
+        "stm32cubepio.ProjectIOCFile": {
+          "type": "string",
+          "default": "project.ioc",
+          "description": "STM32CubeMX *.ioc file"
+        },
+        "stm32cubepio.ProjectType": {
+          "type": "string",
+          "default": "C",
+          "enum": [
+            "C",
+            "C++"
+          ],
+          "description": "Project basic language C or C++"
+        },
+        "stm32cubepio.ProjectBuildSystem": {
+          "type": "string",
+          "default": "PlatformIO",
+          "enum": [
+            "PlatformIO",
+            "Makefile"
+          ],
+          "description": "Project build system"
+        },
+        "stm32cubepio.CleanUnnecessaryFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Clean unnecessary files after work STM32CubeMX"
+        },
+        "stm32cubepio.AutoGenerateProject": {
+          "type": "boolean",
+          "default": true,
+          "description": "Generate code project automatic after change *.ioc files"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.54.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8"
+  }
+}
