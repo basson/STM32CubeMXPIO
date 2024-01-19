@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "pricing": "Free",
   "sponsor": {
-    "url": "https://www.buymeacoffee.com/basson"
+    "url": "https://github.com/basson/STM32CubeMXPIO"
   },
   "engines": {
     "vscode": "^1.54.0"
