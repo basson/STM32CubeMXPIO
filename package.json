@@ -7,6 +7,10 @@
   "sponsor": {
     "url": "https://github.com/basson/STM32CubeMXPIO"
   },
+  "repository": {
+    "url": "https://github.com/basson/STM32CubeMXPIO"
+  },
+  "publisher": "basson-xvi",
   "engines": {
     "vscode": "^1.54.0"
   },
