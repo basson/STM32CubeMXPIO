@@ -2,18 +2,22 @@
   "name": "stm32cubemxpio",
   "displayName": "STM32CubeMXPIO",
   "description": "Generate code from STM32CubeMX at *.ioc files",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "pricing": "Free",
   "sponsor": {
     "url": "https://github.com/basson/STM32CubeMXPIO"
   },
   "repository": {
+    "type": "git",
     "url": "https://github.com/basson/STM32CubeMXPIO"
   },
+  "homepage": "https://github.com/basson/STM32CubeMXPIO/blob/main/README.md",
+  "icon": "images/icon.png",
   "publisher": "basson-xvi",
   "engines": {
     "vscode": "^1.54.0"
   },
+  "keywords": ["c++", "c", "stm32", "platformio", "stm32cubemx", "stm32cubeide", "ioc"],
   "categories": [
     "Other"
   ],
