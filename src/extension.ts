@@ -41,7 +41,9 @@ let autoGenerateProject = false;
 export function activate(context: vscode.ExtensionContext) {
 
 	if (!vscode.workspace) {
-		return vscode.window.showErrorMessage('Please open a project folder first!');
+		console.log("project folder not open");
+		return;
+		/// vscode.window.showErrorMessage('Please open a project folder first!');
 	}
 
 	loadConfiguration();
