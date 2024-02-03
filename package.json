@@ -2,7 +2,7 @@
   "name": "stm32cubemxpio",
   "displayName": "STM32CubeMXPIO",
   "description": "Generate code from STM32CubeMX at *.ioc files",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "pricing": "Free",
   "sponsor": {
     "url": "https://github.com/basson/STM32CubeMXPIO"

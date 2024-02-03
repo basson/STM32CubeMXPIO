@@ -1,9 +1,14 @@
 # Change Log
 
-All notable changes to the "stm32cubepio" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 ## [Unreleased]
 
-- Initial release
+## [0.0.3] - 2024-02-04
+
+### Added
+
+- Detal of readme how run and configure extension
+
+### Fixed
+
+- Clean unnecessary files after work STM32CubeMX
+- Check for exists *.ioc file on startup

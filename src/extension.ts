@@ -36,6 +36,7 @@ let iocFile: string;
 let execCubeMXPath: string;
 let projectType = 'C';
 let autoGenerateProject = false;
+let projectBuildSystem = "Makefile";
 
 
 export function activate(context: vscode.ExtensionContext) {
@@ -48,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	loadConfiguration();
 
-	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {loadConfiguration();}));
+	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => { loadConfiguration(); }));
 
 	// let wf = vscode.workspace.workspaceFolders[0].uri.path ;
 	// let f = vscode.workspace.workspaceFolders[0].uri.fsPath ; 
@@ -59,11 +60,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 
-	if (!fs.existsSync(path.join(workspacePath, iocFile))) {
-		return vscode.window.showErrorMessage('Please configure extension and set file *.ioc at workspace!');
-	}
+	// if (!fs.existsSync(path.join(workspacePath, iocFile))) {
+	// 	return vscode.window.showErrorMessage('Please configure extension and set file *.ioc at workspace!');
+	// }
 	if (autoGenerateProject) {
-		setFileWatcher();
+		if (fs.existsSync(path.join(workspacePath, iocFile))) {
+			setFileWatcher();
+		}
 	}
 	let disposable = vscode.commands.registerCommand('stm32cubemxpio.generate', () => {
 		generateCode();
@@ -72,7 +75,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(disposable);
 }
 
-function loadConfiguration(){
+function loadConfiguration() {
 	let cfg = vscode.workspace.getConfiguration("stm32cubemxpio", workspaceUri);
 
 	workspaceUri = vscode.workspace.workspaceFolders![0].uri;
@@ -81,7 +84,13 @@ function loadConfiguration(){
 	execCubeMXPath = cfg.get('STM32CubeMxExec')!;
 	isCleanUnnecessaryFiles = cfg.get('CleanUnnecessaryFiles')!;
 	projectType = cfg.get('ProjectType')!;
+	projectBuildSystem = cfg.get('ProjectBuildSystem')!;
 	autoGenerateProject = cfg.get("AutoGenerateProject")!;
+	if (autoGenerateProject) {
+		if (fs.existsSync(path.join(workspacePath, iocFile))) {
+			setFileWatcher();
+		}
+	}
 }
 
 function setFileWatcher() {
@@ -107,7 +116,7 @@ async function createTerminalIsNone() {
 	}
 	terminal.show();
 	await sleep(10);
-	
+
 }
 
 async function generateCode() {
@@ -116,7 +125,12 @@ async function generateCode() {
 	}
 	isProgress = true;
 	createTerminalIsNone();
-	await sleep(10);
+	await sleep(100);
+
+	if (!fs.existsSync(path.join(workspacePath, iocFile))) {
+		return vscode.window.showErrorMessage('Please configure extension and set file *.ioc at workspace!');
+	}
+
 	writeEmitter.fire("Generate scripts...\n\r");
 	let ret = generateScriptFile();
 	if (ret) {
@@ -202,7 +216,22 @@ async function executeCubeMX(cubeMXPath: string, scriptPath: string) {
 }
 
 function clearAfterGenerate() {
+	console.log(projectBuildSystem);
+	if (projectBuildSystem === "PlatformIO") {
+		let filesLinker: Array<string> = fs.readdirSync(workspacePath).filter(fn => fn.endsWith('.ld'));
+		let filesAsm: Array<string> = fs.readdirSync(workspacePath).filter(fn => fn.endsWith('.s'));
+		if (filesLinker.length > 0) {
+			fs.rmSync(path.join(workspacePath, filesLinker[0]), { recursive: true, force: true });
+		}
+		if (filesAsm.length > 0) {
+			fs.rmSync(path.join(workspacePath, filesAsm[0]), { recursive: true, force: true });
+		}
+		fs.rmSync(path.join(workspacePath, 'Makefile'), { recursive: true, force: true });
+	}
 	fs.rmSync(path.join(workspacePath, '.mxproject'));
+	var toolchainFolder = iocFile.substring(0, iocFile.length - 4);
+	console.log(toolchainFolder);
+	fs.rmSync(path.join(workspacePath, toolchainFolder), { recursive: true, force: true });
 	fs.rmSync(path.join(workspacePath, "Drivers"), { recursive: true, force: true });
 }
 
