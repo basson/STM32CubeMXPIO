@@ -9,9 +9,19 @@ VSCode extenstion that generate code from *.ioc file on STM32CubeMX from Platfor
 # Install and Setting extension
 
 1. Go Preferences (Open Setting UI) -> Workspace -> Extensions -> STM32CubeMXPIO
-2. Write Project IOCFile (example.ioc)
-3. Write STM32CubeMX exec file (absolute path)
-4. Other settings are optional
+2. Write STM32CubeMX exec file (absolute path)
+3. Other settings are optional
+
+The `*.ioc` file is detected automatically. Set **Project IOC File** only when a
+workspace folder contains more than one `*.ioc` file.
+
+The extension activates only in windows whose workspace contains an `*.ioc` file,
+and the `STM32CubeMXPio` terminal appears on the first generation - other windows
+stay untouched.
+
+In a multi-root workspace every folder is handled on its own: each one can have
+its own settings (Preferences -> Folder), the watcher generates into the folder
+that owns the changed `*.ioc` file, and the command asks which project to build.
 
 
 # How it's work
@@ -21,6 +31,9 @@ VSCode extenstion that generate code from *.ioc file on STM32CubeMX from Platfor
 3. Now run "Command Palette" and write STM32CubeMXPIO:Generate
 4. Wait
 5. Done
+
+Saving the `*.ioc` file regenerates the project automatically. Turn it off with
+the **Auto Generate Project** setting.
 
 # Stm32CubeMX configure project
 
@@ -40,12 +53,9 @@ VSCode extenstion that generate code from *.ioc file on STM32CubeMX from Platfor
 
 
 
-**Подписывайся на мой youtube канал я там стараюсь вести регулярные стримы по всем своим проектам!!**
 
-YouTube Transalations - https://www.youtube.com/@basson_xvi/streams
+YouTube Transalations - https://www.youtube.com/@qymistech
 
-Thingiverse - https://www.thingiverse.com/thing:6427349
+Boosty - https://boosty.to/basson_xvi
 
-Printables - https://www.printables.com/model/716319-flying-bear-ghost-6-slim-skirt-for-electronics-pla
-
-[![](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/basson)
+Patreon - https://www.patreon.com/cw/QymIsTech

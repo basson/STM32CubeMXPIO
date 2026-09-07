@@ -3,12 +3,15 @@
 out/**
 node_modules/**
 src/**
+priview/**
 .gitignore
 .yarnrc
 webpack.config.js
+eslint.config.mjs
 vsc-extension-quickstart.md
 **/tsconfig.json
 **/.eslintrc.json
 **/*.map
 **/*.ts
 **/.vscode-test.*
+**/*.vsix
